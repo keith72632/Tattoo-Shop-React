@@ -8,9 +8,9 @@ import {
 export const listImagesReducer = (state = { images: [] }, action ) => {
     switch(action.type){
         case LIST_IMAGES_REQUEST:
-            return { loading: true, images: []}
+            return { loading: true }
         case LIST_IMAGES_SUCCESS:
-            return { loading: false, images: action.payload}
+            return { loading: false, images: action.payload, success: true}
         case LIST_IMAGES_FAIL:
             return { loading: false, error: action.payload}
         default:

@@ -1,11 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { LinkContainer } from 'react-router-bootstrap'
+import { Image, Container } from 'react-bootstrap'
+import Header from '../components/Header'
 
 const HomeScreen = () => {
     return (
         <>
-            <Link to={'/gallery'}>Gallery</Link>
+            <Header />
+            <Container>
+                <Image src={'/background_images/tattoo_shop.jpg'} fluid/>
+            </Container>
         </>
     )
 }
