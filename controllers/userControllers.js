@@ -25,4 +25,18 @@ const addUser = async(req, res) => {
     
 }
 
+const authorizeUser = async(req, res) => {
+    const { email, password } = req.body;
+    const userExist = await User.findOne({ email });
+
+    if(userExist && await userExist.matchPassword(password)) {
+        res.status(200).json('Login Successful');
+    } else {
+       res.status(400).send('Something wrong with email or password');
+       throw new Error('something wrong with email and passsword')
+    };
+    
+}
+
 module.exports.addUser = addUser;
+module.exports.authorizeUser = authorizeUser;
