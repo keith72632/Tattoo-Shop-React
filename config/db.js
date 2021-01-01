@@ -5,7 +5,7 @@ const connectDb = async() => {
         const connect = await mongoose.connect('mongodb+srv://thinmint:tigers10@clusterk.98gsi.mongodb.net/Tattoo?retryWrites=true&w=majority',{
             useCreateIndex: true,
             useNewUrlParser: true,
-            useFindAndModify: true,
+            useFindAndModify: false,
             useUnifiedTopology: true
         })
         console.log('Connecting to MongoDB database'.green.underline)

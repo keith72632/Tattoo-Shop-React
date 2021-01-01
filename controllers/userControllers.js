@@ -30,7 +30,7 @@ const authorizeUser = async(req, res) => {
     const userExist = await User.findOne({ email });
 
     if(userExist && await userExist.matchPassword(password)) {
-        res.status(200).json('Login Successful');
+        res.status(200).json(userExist);
     } else {
        res.status(400).send('Something wrong with email or password');
        throw new Error('something wrong with email and passsword')
@@ -38,5 +38,16 @@ const authorizeUser = async(req, res) => {
     
 }
 
+const authorizeUserAsAdmin = async(req, res) => {
+    try {
+        await User.findOneAndUpdate(req.params._id, { isAdmin: true});
+        res.status(203).send('Update Successful')
+    } catch(error) {
+        res.status(403).send('User Update to admin Unsucessful')
+    }
+
+}
+
 module.exports.addUser = addUser;
 module.exports.authorizeUser = authorizeUser;
+module.exports.authorizeUserAsAdmin = authorizeUserAsAdmin;

@@ -1,7 +1,22 @@
 import React from 'react'
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { useSelector, useDispatch } from 'react-redux'
+import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
+import { USER_LOGIN_RESET } from '../constants/userConstants'
 
-const Header = () => {
+const Header = (history) => {
+
+  const dispatch = useDispatch()
+
+  const userInfo = useSelector(state => state.userInfo)
+  const { loading: userLoading, success: userSuccess, user } = userInfo
+
+  const logOutHandler = () => {
+    dispatch({
+      type: USER_LOGIN_RESET
+    })
+    history.push('/')
+  }
+
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Navbar.Brand href="/">Tattoo Shop</Navbar.Brand>
@@ -20,9 +35,9 @@ const Header = () => {
     </Nav>
     <Nav>
       <Nav.Link href="#deets">More deets</Nav.Link>
-      <Nav.Link eventKey={2} href="/login">
-        Login
-      </Nav.Link>
+      <NavDropdown title={!userSuccess ? <Nav.Link eventKey={2} href='/login'>Login</Nav.Link> : <h6>Hello, {user.firstName}</h6>} id="user-info-dropdown">
+        {!userSuccess ? <NavDropdown.Item href='/login'>Log In</NavDropdown.Item> : <NavDropdown.Item onClick={logOutHandler}>Logout</NavDropdown.Item>}
+      </NavDropdown>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
