@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Navbar, Nav, NavDropdown, Container } from 'react-bootstrap'
 import { USER_LOGIN_RESET } from '../constants/userConstants'
 
-const Header = (history) => {
+const Header = ({history}) => {
 
   const dispatch = useDispatch()
 
@@ -14,7 +14,6 @@ const Header = (history) => {
     dispatch({
       type: USER_LOGIN_RESET
     })
-    history.push('/')
   }
 
     return (
